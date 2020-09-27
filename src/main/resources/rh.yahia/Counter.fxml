@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="bigHBox" alignment="TOP_CENTER" fillHeight="false" prefHeight="943.0" prefWidth="1542.0" spacing="10.0"
+      style="-fx-background-color: white;" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="rh.yahia.ControllerCounter">
+
+    <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="991.0" prefWidth="430.0" spacing="10.0">
+        <Accordion fx:id="accordion" prefHeight="1021.0" prefWidth="461.0">
+            <panes>
+                <TitledPane fx:id="searchPane" alignment="CENTER" text="Recherche et ajout">
+                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0">
+                        <VBox prefHeight="100.0" prefWidth="142.0" spacing="10.0">
+                            <Label text="Recherche:" underline="true"/>
+                            <HBox alignment="CENTER_LEFT" spacing="50.0">
+                                <RadioButton fx:id="nameRadio" mnemonicParsing="false" selected="true" text="Nom"/>
+                                <RadioButton fx:id="codeRadio" mnemonicParsing="false" text="Code"/>
+                            </HBox>
+                        </VBox>
+                        <HBox alignment="CENTER" spacing="15.0">
+
+                            <TextField fx:id="listViewSearchTextField" prefHeight="62.0" prefWidth="439.0">
+                                <tooltip>
+                                    <Tooltip
+                                            text="F11 || Veuillez noter que le lecteur code barre se mettra en pause si le curseur est placé sur ce champ"/>
+                                </tooltip>
+                            </TextField>
+                            <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="22.0"/>
+                            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#search" prefHeight="36.0"
+                                    prefWidth="58.0">
+                                <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true"
+                                               preserveRatio="true">
+                                        <Image url="@Essential pack/PNG/512/3044654 - app essential interface search ui website.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button mnemonicParsing="false" onAction="#refresh" prefHeight="37.0" prefWidth="8.0">
+                                <graphic>
+                                    <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true"
+                                               preserveRatio="true">
+                                        <Image url="@Essential pack/PNG/512/clipart2146520.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                        <ListView fx:id="prListView" prefHeight="645.0" prefWidth="435.0">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            </padding>
+                        </ListView>
+                        <Button mnemonicParsing="false" onAction="#fromListToTable" prefHeight="36.0" prefWidth="241.0"
+                                text="Ajouter Produit">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@Essential pack/PNG/512/3044699 - add app essential interface ui website.png"/>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Separator prefHeight="100.0" prefWidth="22.0"/>
+                        <Label text="Ajouter un article non-listé:" underline="true"/>
+                        <TextField fx:id="nonListeField" alignment="CENTER" onAction="#addNonListe" prefHeight="31.0"
+                                   prefWidth="238.0" promptText="Prix">
+                            <tooltip>
+                                <Tooltip
+                                        text="F10 || Veuillez noter que le lecteur code barre se mettra en pause si le curseur est placé sur ce champ"/>
+                            </tooltip>
+                        </TextField>
+                        <Button graphicTextGap="20.0" mnemonicParsing="false" onAction="#addNonListe" text="Ajouter"
+                                textAlignment="CENTER"/>
+                    </VBox>
+                </TitledPane>
+                <TitledPane alignment="CENTER" prefHeight="244.0" prefWidth="430.0" styleClass="monnaie" text="Monnaie">
+                    <VBox alignment="TOP_CENTER" spacing="25.0">
+                        <TextField fx:id="keepTheChangeTextField">
+                            <tooltip>
+                                <Tooltip
+                                        text="Veuillez noter que le lecteur code barre se mettra en pause si le curseur est placé sur ce champ"/>
+                            </tooltip>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#getChange" prefHeight="31.0" prefWidth="165.0"
+                                text="Monnaie"/>
+                        <Group>
+                            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="66.0" stroke="BLACK"
+                                       strokeType="INSIDE" width="426.0"/>
+                            <Label fx:id="changeTextArea" alignment="CENTER" layoutX="4.0" layoutY="19.0"
+                                   prefHeight="29.0" prefWidth="421.0" text="0 DA" textAlignment="CENTER"/>
+                        </Group>
+                    </VBox>
+                </TitledPane>
+                <TitledPane fx:id="detailsPane" alignment="CENTER" styleClass="details" text="Détails">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <Label fx:id="detailsLabel" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="186.0"
+                               layoutY="75.0" text="Description:" AnchorPane.bottomAnchor="0.0"
+                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </AnchorPane>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </VBox>
+    <VBox alignment="CENTER" prefHeight="944.0" prefWidth="431.0" spacing="25.0">
+        <Group VBox.vgrow="ALWAYS">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="202.0" layoutX="-8.0" stroke="BLACK"
+                       strokeType="INSIDE" width="426.0"/>
+            <Label fx:id="montantTextArea" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="-2.0"
+                   layoutY="55.0" prefHeight="93.0" prefWidth="212.0" styleClass="montant-label" text="0"
+                   textAlignment="CENTER">
+                <font>
+                    <Font size="64.0"/>
+                </font>
+            </Label>
+            <Label fx:id="montantTextAreaN2" contentDisplay="CENTER" layoutX="216.0" layoutY="55.0" prefHeight="93.0"
+                   prefWidth="112.0" styleClass="montant-label" text="DA" textAlignment="CENTER">
+                <font>
+                    <Font size="25.0"/>
+                </font>
+            </Label>
+        </Group>
+        <Button mnemonicParsing="false" onAction="#saveAchatEvent" text="Enregistrer">
+            <tooltip>
+                <Tooltip text="F12"/>
+            </tooltip>
+            <graphic>
+                <ImageView fitHeight="41.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Essential pack/PNG/512/img_461091.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <ToggleButton fx:id="settingsToggleBtn" mnemonicParsing="false" onAction="#askForPassword" text="Gestion">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Essential pack/PNG/512/3044718 - app essential interface list ui website.png"/>
+                </ImageView>
+            </graphic>
+        </ToggleButton>
+        <Group fx:id="passwordGroup" visible="false">
+            <PasswordField fx:id="passTextField" layoutX="-34.0" layoutY="1.0" onAction="#verifyPassword"
+                           prefHeight="35.0" prefWidth="162.0" promptText="Mot de passe"/>
+            <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="148.0" layoutY="-1.0"
+                    mnemonicParsing="false" onAction="#verifyPassword" prefHeight="22.0" prefWidth="20.0"
+                    textAlignment="CENTER">
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="28.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@Essential pack/PNG/512/3044721 - app essential interface padlock ui website.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <VBox.margin>
+                <Insets left="75.0"/>
+            </VBox.margin>
+        </Group>
+
+    </VBox>
+    <VBox prefHeight="105.0" prefWidth="29.0" spacing="10.0">
+        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addQuantity"
+                styleClass="details-button">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Essential pack/PNG/512/3044641 - add app essential interface ui website.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#subtractQuan"
+                styleClass="details-button" textAlignment="CENTER">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Essential pack/PNG/512/3044642 - app essential interface remove ui website.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deleteEvent"
+                prefHeight="37.0" prefWidth="69.0" styleClass="details-button" textAlignment="CENTER">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Essential pack/PNG/512/3044687 - app essential interface remove ui website.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#writeDetails"
+                prefHeight="52.0" prefWidth="45.0" styleClass="details-button" text="?" textAlignment="CENTER">
+            <font>
+                <Font name="Arial Bold" size="22.0"/>
+            </font>
+        </Button>
+        <padding>
+            <Insets top="100.0"/>
+        </padding>
+    </VBox>
+    <TableView fx:id="caisseTable" prefHeight="1050.0" prefWidth="717.0">
+        <columns>
+            <TableColumn fx:id="prNameClmn" prefWidth="-1.0" sortable="false" text="Nom"/>
+            <TableColumn fx:id="prPriceClmn" prefWidth="253.0" sortable="false" text="Prix">
+            </TableColumn>
+            <TableColumn fx:id="prQuantityClmn" prefWidth="271.0" sortable="false" text="Quantité"/>
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <HBox.margin>
+            <Insets/>
+        </HBox.margin>
+    </TableView>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+</HBox>

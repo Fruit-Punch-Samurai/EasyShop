@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'edu.sc.seis.launch4j' version '2.4.6'
+    id 'com.github.johnrengelman.shadow' version "5.0.0"
+    id 'com.github.gmazzo.sqlite' version "0.2"
+    id "org.beryx.jlink" version "2.9.4"
+}
+
+sourceCompatibility = '12.0.1'
+targetCompatibility = '12.0.1'
+
+
+launch4j {
+    headerType = "gui"
+    mainClassName = 'rh.yahia.Launcher'
+    outfile = "EasyShop.exe"
+    jar = '../libs/EasyShop-all.jar'
+}
+
+sqlite {
+    driverDependency 'org.xerial:sqlite-jdbc:3.27.2.1'
+}
+
+dependencies {
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.27.2.1'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "12"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+jlink {
+    launcher {
+        name = 'rh.yahia.Launcher'
+    }
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": 'rh.yahia.Launcher'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+application {
+    mainClassName = 'rh.yahia.Launcher'
+}
+
+mainClassName = 'rh.yahia.Launcher'
+
+//java -jar ./build/libs/hellofx.jar
+// deleted some oracle path variable
